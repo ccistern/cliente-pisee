@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WSDL:definitions xmlns:ns="urn:CertNacimiento" xmlns:DIME="http://schemas.xmlsoap.org/ws/2002/04/dime/wsdl/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:MIME="http://schemas.xmlsoap.org/wsdl/mime/" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="urn:CertNacimiento" name="CertNacimiento" targetNamespace="urn:CertNacimiento" xmlns:WSDL="http://schemas.xmlsoap.org/wsdl/">
+  <WSDL:types>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns="urn:CertNacimiento" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="urn:CertNacimiento">
+      <xsd:import schemaLocation="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <xsd:complexType name="rune">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="numero" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="dv" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="names">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="nombres" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="apellidoPaterno" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="apellidoMaterno" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="nacimiento">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="Circunscripcion" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="nroInscripcion" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="registro" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="agnoInscripcion" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Nombre" nillable="true" type="tns:names" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="fechaNacimiento" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="sexo" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="lugarNacimiento" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="nacionalidadNacimiento" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="nombrePadre" nillable="true" type="tns:names" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="runPadre" nillable="true" type="tns:rune" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="nombreMadre" nillable="true" type="tns:names" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="runMadre" nillable="true" type="tns:rune" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="DataInput">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="Run" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Dv" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="getInfo">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="1" name="consumidor" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="0" maxOccurs="1" name="tramite" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="0" maxOccurs="1" name="datainput" nillable="true" type="tns:DataInput" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getInfoResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="1" name="CertificadoNacimiento" nillable="true" type="tns:nacimiento" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </WSDL:types>
+  <WSDL:message name="getInfo">
+    <WSDL:part name="parameters" element="tns:getInfo" />
+  </WSDL:message>
+  <WSDL:message name="getInfoResponse">
+    <WSDL:part name="parameters" element="tns:getInfoResponse" />
+  </WSDL:message>
+  <WSDL:portType name="CertNacimientoPortType">
+    <WSDL:operation name="getInfo">
+      <documentation>Service definition of function ns__getInfo</documentation>
+      <WSDL:input message="tns:getInfo" />
+      <WSDL:output message="tns:getInfoResponse" />
+    </WSDL:operation>
+  </WSDL:portType>
+  <WSDL:binding name="CertNacimiento" type="tns:CertNacimientoPortType">
+    <SOAP:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <WSDL:operation name="getInfo">
+      <SOAP:operation soapAction="" />
+      <WSDL:input>
+        <SOAP:body use="literal" parts="parameters" />
+      </WSDL:input>
+      <WSDL:output>
+        <SOAP:body use="literal" parts="parameters" />
+      </WSDL:output>
+    </WSDL:operation>
+  </WSDL:binding>
+  <WSDL:service name="CertNacimiento">
+    <documentation>gSOAP 2.7.12 generated service definition</documentation>
+    <WSDL:port name="CertNacimiento" binding="tns:CertNacimiento">
+      <SOAP:address location="https://www3.pisee.cl/SRCeICertificadoNacimientoCONADIProxy" />
+    </WSDL:port>
+  </WSDL:service>
+</WSDL:definitions>
